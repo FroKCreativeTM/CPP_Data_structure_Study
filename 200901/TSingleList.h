@@ -16,7 +16,14 @@ private :
 public : 
 	TSingleListNode() :
 		m_pNextNode(nullptr) {}
-	~TSingleListNode() {}
+	~TSingleListNode() 
+	{
+		if (m_pNextNode)
+		{
+			delete m_pNextNode;
+		}
+		m_pNextNode = nullptr;
+	}
 };
 
 template <typename T>
@@ -42,26 +49,9 @@ public :
 	// Destroy
 	~TSingleList()
 	{
-		// 리스트에 있는 노드를 다 삭제시킨다.
-		while (m_nCurCount != 0) 
-		{
-			// 지울 노드는 끝부터 차례로 지운다.
-			PNODE delNode = m_pHead->m_pNextNode;
 
-			// 끝까지 간다.
-			while (delNode->m_pNextNode != nullptr)
-			{
-				PNODE delNextNode = delNode->m_pNextNode;
-				delNode = delNextNode;
-			}
 
-			// 끝 노드를 삭제 시킨다.
-			delete delNode;
-			// 현재 리스트의 크기를 감소시킨다.
-			--m_nCurCount;
-		}
-
-		delete m_pHead;
+		m_nCurCount = 0;
 	}
 
 public : 
